@@ -1,0 +1,20 @@
+{
+    "disksize": 80,
+    "config": "img/boot/config",
+    "initrd": {
+        "type": "tar",
+        "file": "img/boot/exe"
+    },
+    "partitions": [
+        {
+            "type": "boot",
+            "size": 4,
+            "directory": "img/boot/loader"
+        },
+        {
+            "type": "Microsoft basic data",
+            "size": 76,
+            "name": "Chroma Data"
+        }
+    ]
+}

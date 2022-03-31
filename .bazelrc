@@ -1,0 +1,1 @@
+build --crosstool_top=//third_party/toolchains:elf_gcc --cpu=x86_64
