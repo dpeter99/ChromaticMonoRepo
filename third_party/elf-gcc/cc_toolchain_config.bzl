@@ -8,14 +8,13 @@ load(
     "flag_group",
     "flag_set",
     "tool",
-    "tool_path",
+    #"tool_path",
 )
 
 all_link_actions = [
     ACTION_NAMES.cpp_link_executable,
     ACTION_NAMES.cpp_link_dynamic_library,
     ACTION_NAMES.cpp_link_nodeps_dynamic_library,
-    #ACTION_NAMES.cpp_link_static_library,
 ]
 
 all_compile_actions = [
@@ -33,21 +32,12 @@ all_compile_actions = [
 
 def _impl(ctx):
     gcc_wrapper = ctx.file.gcc_wrapper
-
     ld_wrapper = ctx.file.ld_wrapper
     ar_wrapper = ctx.file.ar_wrapper
 
     action_configs = [
         action_config(
             action_name = ACTION_NAMES.cpp_link_nodeps_dynamic_library,
-            implies = [
-                #"output_execpath_flags",
-                #"input_param_flags",
-                #"user_link_flags",
-                #"default_link_flags",
-                #"linker_param_file",
-                #"tasking_env",
-            ],
             tools = [tool(tool = gcc_wrapper)],
         ),
         action_config(
@@ -61,13 +51,13 @@ def _impl(ctx):
         ),
         action_config(
             action_name = ACTION_NAMES.cpp_compile,
-            implies = [
-                #"compiler_input_flags",
-                #"compiler_output_flags",
-                #"default_compile_flags",
-                #"user_compile_flags",
-                "include_paths",
-            ],
+            #implies = [
+            #"compiler_input_flags",
+            #"compiler_output_flags",
+            #"default_compile_flags",
+            #"user_compile_flags",
+            #    "include_paths",
+            #],
             tools = [tool(tool = gcc_wrapper)],
         ),
         action_config(
@@ -80,7 +70,7 @@ def _impl(ctx):
         ),
         action_config(
             action_name = ACTION_NAMES.cpp_link_static_library,
-            tools = [tool(tool = gcc_wrapper)],
+            tools = [tool(tool = ar_wrapper)],
         ),
     ]
 

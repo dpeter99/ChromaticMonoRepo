@@ -25,10 +25,10 @@ cc_toolchain(
     name = "elf_gcc_toolchain_definition",
     all_files = ":all_files",
     compiler_files = ":all_files",
-    dwp_files = ":empty",
+    dwp_files = ":all_files",
     linker_files = ":all_files",
-    objcopy_files = ":empty",
-    strip_files = ":empty",
+    objcopy_files = ":all_files",
+    strip_files = ":all_files",
     #toolchain_identifier = "elf-gcc-toolchain",
     toolchain_config = ":elf_gcc_toolchain_config",
 )
@@ -49,7 +49,10 @@ toolchain(
     ],
     # Trigger this toolchain for x86-compatible platforms.
     # See https://github.com/bazelbuild/platforms.
-    target_compatible_with = ["@platforms//cpu:x86_64"],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:none",
+    ],
     toolchain = ":elf_gcc_toolchain_definition",
     # Register this toolchain with platforms.
     # The public interface for all C++ toolchains. Starlark rules that use C++
